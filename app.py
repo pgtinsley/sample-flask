@@ -1,9 +1,14 @@
-from flask import Flask
-from flask import render_template
+import glob
+
+from random import choice
+
+from flask import Flask, request, render_template, url_for
 
 app = Flask(__name__)
 
+fnames = glob.glob('./static/iris_images/*')
 
 @app.route("/")
-def hello_world():
-    return render_template("index.html")
+def index():
+    fname = choice(fnames)
+    return render_template("index.html", fname=fname)
